@@ -1,9 +1,9 @@
-
+# Michael Merabi - Math 341 - Quiz 1
 import statistics
 import numpy as np
 import matplotlib.pyplot as plt
 import stemgraphic
-
+import math
 
 def solve(data):
     #call each of the functions for each data set
@@ -25,6 +25,10 @@ def solve(data):
     boxplot(data)
     print("\n ")
     print( stemplot(data) )
+    print("\n ")
+    print( histogram(data) )
+    print("\n ")
+    print( ogive(data,x) )
 
 def mean(data):
     x = statistics.mean(data)
@@ -82,9 +86,23 @@ def boxplot(data):
     ax4.boxplot(data, vert=False, showfliers=False)
     
 def stemplot(data):
-    stemgraphic.stem_graphic(data, scale = 10) 
+    stemgraphic.stem_graphic(data, scale = 1) 
 
+def histogram(data):  
+    fig, ax = plt.subplots()
+    counts, bins, patches = plt.hist(data)
+    bin_centers = np.mean(zip(bins[:-1], bins[1:]), axis=1)
+    ax.plot(bin_centers, counts.cumsum(), 'ro-')
+    plt.show()
+    
+def ogive(data, x):
+    fig, ax = plt.subplots()
+    n_bins = int(math.sqrt(x))
 
+    # plot the cumulative histogram
+    n, bins, patches = ax.hist(data, n_bins, density=True, histtype='step',
+    cumulative=True, label='Empirical')
+    plt.show()
 
 data1 = [4.6, 12.3, 7.1, 7.0, 4.0, 9.2, 6.7, 6.9, 11.5, 5.1, 11.2, 10.5, 14.3,
             8.0, 8.8, 6.4, 5.1, 5.6, 9.6, 7.5, 0.2, 1.6, 7.5, 6.2, 5.8, 2.3, 3.4,
