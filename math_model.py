@@ -1,4 +1,3 @@
-# Michael Merabi - Math 341 - Quiz 1
 import statistics
 import matplotlib.pyplot as plt
 import stemgraphic
